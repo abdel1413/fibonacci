@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="weather-container">
+    <h1>Weather App</h1>
+    <input type="text" id="cityInput" placeholder="Enter city name">
+    <button id="getWeatherBtn">Get Weather</button>
+    <button id="toggleTempBtn">Switch to °F</button>
+
+    <div id="weatherInfo"></div>
+    <div id="hourlyForecast"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f4f8;
+      color: #333;
+      margin: 0;
+    }
+
+    h1, h2 {
+      color: #0077b6;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 8px;
+    }
+
+    #search-box {
+      margin-bottom: 20px;
+    }
+
+    #current, #hourly {
+      background: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #caf0f8;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    img.icon {
+      width: 30px;
+      vertical-align: middle;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌤️ Weather App</h1>
+
+  <div id="search-box">
+    <input type="text" id="city-input" placeholder="Enter city name" />
+    <button onclick="searchCity()">Search</button>
+    <p id="location-display">Showing weather for: <strong id="location-name">Berlin</strong></p>
+  </div>
+
+  <div id="current">
+    <h2>Current Conditions</h2>
+    <p>
+      <img id="weather-icon" class="icon" src="" alt="weather icon" />
+      Temperature: <strong id="current-temp">--</strong> °C
+    </p>
+    <p>Wind Speed: <strong id="current-wind">--</strong> m/s</p>
+  </div>
+
+  <div id="hourly">
+    <h2>Next 24 Hours Forecast</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Icon</th>
+          <th>Temperature (°C)</th>
+          <th>Humidity (%)</th>
+          <th>Wind (m/s)</th>
+        </tr>
+      </thead>
+      <tbody id="forecast-body">
+        <tr><td colspan="5">Loading forecast...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let currentLat = 52.52;
+    let currentLon = 13.41;
+    let currentCity = "Berlin";
+    let refreshInterval = 30 * 60 * 1000; // 30 minutes
+
+    async function searchCity() {
+      const city = document.getElementById("city-input").value.trim();
+      if (!city) return;
+
+      try {
+        const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`;
+        const res = await fetch(geoUrl);
+        const data = await res.json();
+        
+        if (data.results && data.results.length > 0) {
+          const loc = data.results[0];
+          currentLat = loc.latitude;
+          currentLon = loc.longitude;
+          currentCity = loc.name;
+          document.getElementById("location-name").textContent = `${loc.name}, ${loc.country}`;
+          loadWeather(); // refresh with new coordinates
+        } else {
+          alert("City not found.");
+        }
+      } catch (err) {
+        alert("Error fetching city data.");
+        console.error(err);
+      }
+    }
+
+    function getWeatherIcon(code) {
+      const iconMap = {
+        0: "☀️", 1: "🌤️", 2: "⛅", 3: "☁️",
+        45: "🌫️", 48: "🌫️", 51: "🌦️", 53: "🌧️",
+        55: "🌧️", 56: "🌧️", 57: "🌧️", 61: "🌧️",
+        63: "🌧️", 65: "🌧️", 66: "🌧️", 67: "🌧️",
+        71: "🌨️", 73: "🌨️", 75: "❄️", 77: "❄️",
+        80: "🌧️", 81: "🌧️", 82: "🌧️", 85: "🌨️",
+        86: "🌨️", 95: "⛈️", 96: "⛈️", 99: "⛈️"
+      };
+      return iconMap[code] || "❔";
+    }
+
+    async function loadWeather() {
+      const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${currentLat}&longitude=${currentLon}&current=temperature_2m,wind_speed_10m,weathercode&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weathercode`;
+
+      try {
+        const res = await fetch(apiUrl);
+       
+        const data = await res.json();
+        console.log('data', data)
+
+        // Current
+        document.getElementById("current-temp").textContent = data.current.temperature_2m;
+        document.getElementById("current-wind").textContent = data.current.wind_speed_10m;
+        const currentCode = data.current.weathercode;
+        document.getElementById("weather-icon").src = `https://raw.githubusercontent.com/basmilius/weather-icons/master/production/fill/all/${currentCode}.svg`;
+        document.getElementById("weather-icon").alt = getWeatherIcon(currentCode);
+
+        // Forecast
+        const times = data.hourly.time;
+        const temps = data.hourly.temperature_2m;
+        const humidities = data.hourly.relative_humidity_2m;
+        const winds = data.hourly.wind_speed_10m;
+        const codes = data.hourly.weathercode;
+        console.log('codes',codes)
+
+        const now = new Date();
+        const forecastBody = document.getElementById("forecast-body");
+        forecastBody.innerHTML = '';
+
+        for (let i = 0; i < times.length; i++) {
+          const time = new Date(times[i]);
+          if (time > now && forecastBody.children.length < 24) {
+            const row = document.createElement('tr');
+
+            const timeCell = document.createElement('td');
+            timeCell.textContent = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              console.log("code[i]", codes[i])
+            const iconCell = document.createElement('td');
+            const icon = document.createElement('img');
+            icon.src = `https://raw.githubusercontent.com/basmilius/weather-icons/master/production/fill/all/${codes[i]}.svg`;
+            icon.alt = getWeatherIcon(codes[i]);
+            icon.className = "icon";
+            iconCell.appendChild(icon);
+
+            const tempCell = document.createElement('td');
+            tempCell.textContent = temps[i];
+
+            const humidCell = document.createElement('td');
+            humidCell.textContent = humidities[i];
+
+            const windCell = document.createElement('td');
+            windCell.textContent = winds[i];
+
+            row.appendChild(timeCell);
+            row.appendChild(iconCell);
+            row.appendChild(tempCell);
+            row.appendChild(humidCell);
+            row.appendChild(windCell);
+
+            forecastBody.appendChild(row);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch weather data:", error);
+      }
+    }
+
+    // Initial load
+    loadWeather();
+
+    // Auto-refresh every 30 minutes
+    setInterval(loadWeather, refreshInterval);
+  </script>
+
+</body>
+</html> -->
+
+

@@ -1,0 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #eef;
+  text-align: center;
+  padding: 20px;
+}
+
+.weather-container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#hourlyForecast {
+  display: flex;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.forecast-item {
+  flex: 0 0 auto;
+  width: 100px;
+  margin-right: 10px;
+  padding: 10px;
+  background: #f4f4f4;
+  border-radius: 5px;
+}
