@@ -28,3 +28,15 @@ const gdc = (a,b)=>{
 const lcm2 =(a,b)=>{
     return (a*b)/ gdc(a,b)
 }
+// Combination formal C(n,r)= n!/(r!⋅(n−r)!)
+//create a factorial function
+// then use  apply the formula in the function
+const factorial =(n)=>{
+    //4 <=1? yes the go 4*
+    //  factorial(3)=> n =4*3 => 3<=1 yes 3* fact(2) => 2<=1? yes 2*fact(1)=> 1<=1 yes =1
+    //4*3*2*1
+     
+
+    return n <=1? n: n* factorial(n-1)
+}
+
