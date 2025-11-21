@@ -68,14 +68,13 @@ async function getWeather() {
 }
 
 async function getHourlyForecast(lat, lon) {
-    console.log(lon,lat)
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lon}&lon=${lat}&exclude=current,minutely,daily,alerts&units=metric&appid=${API_KEY}`;
   const res = await fetch(url);
   const data = await res.json();
   console.log("data",data)
 
   const hourly = data.hourly.slice(0, 12); // next 12 hours
-  console.log('hou', hourly)
+  
 
   const forecastContainer = document.getElementById('hourlyForecast');
   forecastContainer.innerHTML = '';
