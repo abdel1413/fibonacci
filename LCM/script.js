@@ -4,7 +4,6 @@ const lcm=(a,b)=>{
    const common = aValues.filter(v => bValues.includes(v))
    return  common[0]
 }
-
 const findMultiple =(a,count)=>{
     const result = [];
     for(let i = 1; count; i++){
@@ -13,7 +12,6 @@ const findMultiple =(a,count)=>{
 
     return result;
 }
-
 
 //Using GCD (more efficient)
 
