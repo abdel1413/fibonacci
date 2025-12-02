@@ -9,7 +9,7 @@ function verify(message, key, signature) {
  }
  
  const validator = (char)=>{
-     console.log(char >= "a")
+    
    if(char >="a" &&  char <='z'){
      return char.charCodeAt(0) - "a".charCodeAt(0)+1;
    }else if(char >= "A" && char <= 'Z'){
