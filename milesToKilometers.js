@@ -6,3 +6,4 @@ function convertToKm(miles) {
 
 convertToKm(1)
  convertToKm(21)
+ 
