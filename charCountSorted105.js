@@ -31,6 +31,22 @@ let regex = /[a-z]/
 }
 
 
+//2nd approach
+function charCount(sentence) {
+  const counts = {};
+
+  for (const char of sentence.toLowerCase()) {
+    if (char >= 'a' && char <= 'z') {
+      counts[char] = (counts[char] || 0) + 1;
+    }
+  }
+
+  return Object.keys(counts)
+    .sort()
+    .map(letter => `${letter} ${counts[letter]}`);
+}
+
+
 // Example usage:   
 countCharacters("hello world")
  countCharacters("I love coding challenges!")
