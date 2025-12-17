@@ -23,7 +23,5 @@ function hasConsonantCount(text, target) {
 console.log(hasConsonantCount("Hello, World!", 7)) // should return true
 console.log(hasConsonantCount("This is a test.", 7)) // should return false
 console.log(hasConsonantCount("JavaScript is fun!", 10)) // should return true
-console.log(hasConsonantCount("AEIOU are vowels.", 7)) // should return false
-
-
+console.log(hasConsonantCount("AEIOU are vowels.", 7)) // should return false;
 hasConsonantCount("Th3 Qu!ck Br0wn F0x Jump5 0ver Th3 L@zy D0g.", 23)
