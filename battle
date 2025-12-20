@@ -1,0 +1,41 @@
+function battleOfWords(myTeam, opposingTeam) {
+  const myWords = myTeam.split(" ");
+  const oppWords = opposingTeam.split(" ");
+
+  let myWins = 0;
+  let oppWins = 0;
+
+  function wordValue(word) {
+    let sum = 0;
+
+    for (const ch of word) {
+      const base = ch.toLowerCase().charCodeAt(0) - 96;
+      if (ch >= "A" && ch <= "Z") {
+        sum += base * 2;
+      } else {
+        sum += base;
+      }
+    }
+
+    return sum;
+  }
+
+  for (let i = 0; i < myWords.length; i++) {
+    const myValue = wordValue(myWords[i]);
+    const oppValue = wordValue(oppWords[i]);
+
+    if (myValue > oppValue) myWins++;
+    else if (oppValue > myValue) oppWins++;
+  }
+
+  if (myWins > oppWins) return "We win";
+  if (myWins < oppWins) return "We lose";
+  return "Draw";
+}
+
+// Example usage:       
+console.log(battleOfWords("Hello World", "hello there")); // should return "We win"
+console.log(battleOfWords("abc def", "ABC DEF"));       // should return "Draw"
+console.log(battleOfWords("JavaScript is Fun", "python is cool")); // should return "We win"
+console.log(battleOfWords("a b c", "A B C"));           // should return "Draw"
+console.log(battleOfWords("Zebra apple", "zebra Apple")); // should return "We lose"
