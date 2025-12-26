@@ -1,3 +1,15 @@
+
+
+/**
+ * 
+ *1 Split the string into lines using \n
+  2 For each line:
+Reverse the line character by character (including spaces)
+3 Append it to the original line
+ 4 Rejoin the lines using \n
+  No trimming → whitespace preserved exactly
+ */
+
 function generateSnowflake(crystals) {
    
    const splitted = crystals.split("\n")
