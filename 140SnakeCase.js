@@ -27,5 +27,18 @@ function snakeCase(str) {
         return result;  
 }
 
+//3rd approach  not that efficient
+function snakeCase(variableName) {
+     let result = '';
+     for(let i = 0; i < variableName.length; i++) {
+         if(variableName[i] === '-') {
+        result = variableName.slice(0, i) + '_' + variableName.slice(i + 1);
+         }else if (variableName[i] ===variableName[i].toUpperCase()) {    
+            result = variableName.slice(0, i) + '_' + variableName[i] + variableName.slice(i + 1);
+         }  
+     }
+     return (result.toUpperCase()|| variableName.toUpperCase());  
+}
+
 // Example usage:
 console.log(snakeCase("helloWorld"));
