@@ -45,6 +45,45 @@ console.log(country, area, local3,local4)
 }
 
 
+//2nd approach
+function isSpam(phone) {
+  // Remove all non-digits
+  const digits = phone.replace(/\D/g, "");
+
+  // Extract parts
+  const match = digits.match(/^(\d+)(\d{3})(\d{3})(\d{4})$/);
+  if (!match) return true; // invalid format = spam
+
+  const [, country, area, local3, local4] = match;
+
+  // Rule 1: Country code
+  if (country.length > 2 || country[0] !== "0") {
+    return true;
+  }
+
+  // Rule 2: Area code
+  const areaNum = Number(area);
+  if (areaNum < 200 || areaNum > 900) {
+    return true;
+  }
+
+  // Rule 3: Local number sum rule
+  const sumLocal3 = local3
+    .split("")
+    .reduce((sum, d) => sum + Number(d), 0);
+
+  if (local4.includes(String(sumLocal3))) {
+    return true;
+  }
+
+  // Rule 4: Repeated digits
+  if (/(\d)\1{3,}/.test(digits)) {
+    return true;
+  }
+
+  return false;
+}
+
 isSpam("+0 (200) 234-0182") // should return false
 isSpam("1-800-123-4567") // should return true
 isSpam("+12 345 678 9012") // should return false
