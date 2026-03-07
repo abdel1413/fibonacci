@@ -33,7 +33,7 @@ function cardValues(cards) {
 cardValues(["3H", "4D", "5S"])
 cardValues(["AS", "KS"])
  //short version using object literal and implicit return
-const getCardValues = cards =>
-  cards.map(c =>
-    ({ A:1, J:10, Q:10, K:10 }[c.slice(0,-1)] || +c.slice(0,-1))
-  );
+
+function cardValues(cards) {
+  return  cards.map(card =>({"A": 1, "J": 10, "Q": 10, "K": 10}[card.slice(0,-1)] || +(card.slice(0,-1)))) 
+}
