@@ -41,4 +41,27 @@ function smallestGap(str) {
   return result;
 }
 
-//time complexity O(n) space complexity O(n)    
+//time complexity O(n) space complexity O(n)  
+
+//3rd solution using map
+function smallestGap(str) {
+  const charIndices = new Map();
+  let minGap = Infinity;
+  let result = '';
+
+  for (let i = 0; i < str.length; i++) {
+    const char = str[i];
+    if (charIndices.has(char)) {
+      const gap = i - charIndices.get(char) - 1;
+      if (gap < minGap) {
+        minGap = gap;
+        result = str.slice(charIndices.get(char) + 1, i);
+      }
+    }
+    charIndices.set(char, i);
+  }
+ 
+  return result;
+}
+
+//time complexity O(n) space complexity O(n)
