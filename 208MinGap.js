@@ -52,10 +52,11 @@ function smallestGap(str) {
   for (let i = 0; i < str.length; i++) {
     const char = str[i];
     if (charIndices.has(char)) {
-      const gap = i - charIndices.get(char) - 1;
+        const previousIndex = charIndices.get(char);
+      const gap = i - previousIndex - 1;
       if (gap < minGap) {
         minGap = gap;
-        result = str.slice(charIndices.get(char) + 1, i);
+        result = str.slice(previousIndex + 1, i);
       }
     }
     charIndices.set(char, i);
