@@ -65,3 +65,29 @@ navigateTrail([
    "--T--", 
    "CTT--"])
    //RRUUURR
+
+
+   //shortest version
+   function trailMoves(map) {
+  map = map.map(r => r.split(""));
+  
+  let r = map.findIndex(row => row.includes("C"));
+  let c = map[r].indexOf("C");
+  
+  const dirs = [[0,1,"R"],[1,0,"D"],[0,-1,"L"],[-1,0,"U"]];
+  let res = "";
+
+  while (map[r][c] !== "G") {
+    for (let [dr,dc,m] of dirs) {
+      let nr = r + dr, nc = c + dc;
+      if (map[nr]?.[nc] === "T" || map[nr]?.[nc] === "G") {
+        res += m;
+        map[r][c] = "-";
+        r = nr; c = nc;
+        break;
+      }
+    }
+  }
+  return res;
+}
+
