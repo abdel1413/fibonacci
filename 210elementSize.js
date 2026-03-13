@@ -11,4 +11,13 @@ console.log(`${width} x ${height}`)
   return `${width} x ${height}`;
 }
 
+//2nd version using destructuring and implicit return   
+function getElementSize(windowSize, elementVw, elementVh) {
+  const [windowWidth, windowHeight] = windowSize.split(" x ").map(Number);
+  const vw = parseFloat(elementVw);
+  const vh = parseFloat(elementVh);
+
+  return `${(windowWidth * vw) / 100} x ${(windowHeight * vh) / 100}`;
+}
+
 getElementSize("1200 x 800", "50vw", "50vh")
