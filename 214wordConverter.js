@@ -9,4 +9,9 @@ function convertWords(str) {
 
 }
 
+
+// 2nd solution
+function convertWords(str) {
+  return str.split(" ").map(s => s.length).join(" ")
+}   
 convertWords("hello world")
