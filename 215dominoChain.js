@@ -8,4 +8,8 @@ if( dominoes[i][1] !== dominoes[i+1][0]){
 }
 return true
 }
+
+//2nd solution
+const isValidDominoChain = d => d.every((v,i)=>!i || d[i-1][1]===v[0]);
+
  isValidDominoChain([[6, 2], [3, 4], [4, 1]])
