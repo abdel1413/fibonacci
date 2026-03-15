@@ -2,40 +2,38 @@ function calculateParkingFee(parkTime, pickupTime) {
 //
 let fees = 3;
 let overnight = false;
- let startHours = parkTime.split(":").map(Number)
- let endHours = pickupTime.split(":").map(Number)
- console.log(startHours)
- let start = (startHours[0])
-  if((startHours[1]) > 0)
-  start + 1;
-  let end = endHours[0]
-  if(endHours[1]>0){
-    end +1;
-  }
-  console.log(end)
-  console.log(start)
+ let [ph, pm] = parkTime.split(":").map(Number)
+ let [eh, em]= pickupTime.split(":").map(Number)
+ 
+ let start = ph *60 + pm;
+ let end = eh *60 + em;
+
+  
   console.log(fees)
    if(end < start){
-     end +=24; //next day
-     console.log(end)
+     end +=24 *60 ; //next day
      overnight = true;
    }
-  if(overnight) fees +=10;
+
+ let totalMin = end -start
+ console.log(totalMin)
+ const hours =Math.ceil(totalMin /60)
+ console.log(hours)
  
-   let totalHours = end -start
-   let cost = 0;
-   if(totalHours < 2) {
-     fees = 5;
-   }else {
-       
-     fees *= totalHours;
-     
-   }
+  let cost  = hours<2? 5 : fees *hours
+
+
+  
+  if(overnight) cost +=10;
+  console.log(cost)
+ 
+  
+    
    
  
 
-  console.log(fees)
-  return `$${fees}`;
+  console.log(cost)
+  return `$${cost}`;
 }
 
 calculateParkingFee("18:15", "01:30")
