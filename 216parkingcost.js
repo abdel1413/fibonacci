@@ -79,4 +79,17 @@ const calculateParkingFee = (park, pick) => {
   return `$${Math.max(5, cost)}`;
 };
 
+//cleaner 
+const calculateParkingFee = (a,b) => {
+  let [h1,m1] = a.split(':').map(Number),
+      [h2,m2] = b.split(':').map(Number),
+      s = h1*60+m1, e = h2*60+m2;
+
+  if(e<s) e+=1440;
+
+  let cost = Math.ceil((e-s)/60)*3 + (b<a?10:0);
+  return `$${Math.max(5,cost)}`;
+};
+
+
 calculateParkingFee("18:15", "01:30")
