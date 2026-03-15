@@ -67,4 +67,16 @@ function calculateParkingFee(parkTime, pickupTime) {
   return `$${cost}`;
 }
 
+// short solution
+const calculateParkingFee = (park, pick) => {
+  const [ph, pm] = park.split(":").map(Number);
+  const [eh, em] = pick.split(":").map(Number);
+
+  let start = ph * 60 + pm, end = eh * 60 + em;
+  if (end < start) end += 1440;
+
+  let cost = Math.ceil((end - start) / 60) * 3 + (end - start >= 1440 ? 10 : (pick < park ? 10 : 0));
+  return `$${Math.max(5, cost)}`;
+};
+
 calculateParkingFee("18:15", "01:30")
