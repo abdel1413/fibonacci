@@ -36,4 +36,35 @@ let overnight = false;
   return `$${cost}`;
 }
 
+
+// 2nd solution
+
+function calculateParkingFee(parkTime, pickupTime) {
+
+  const [ph, pm] = parkTime.split(":").map(Number);
+  const [eh, em] = pickupTime.split(":").map(Number);
+
+  let start = ph * 60 + pm;
+  let end = eh * 60 + em;
+
+  let overnight = false;
+
+  if (end < start) {
+    end += 24 * 60; // next day
+    overnight = true;
+  }
+
+  let totalMinutes = end - start;
+
+  let hours = Math.ceil(totalMinutes / 60);
+
+  let cost = hours * 3;
+
+  if (overnight) cost += 10;
+
+  if (cost < 5) cost = 5;
+
+  return `$${cost}`;
+}
+
 calculateParkingFee("18:15", "01:30")
