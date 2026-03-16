@@ -37,6 +37,44 @@ let overnight = false;
 }
 
 
+function calculateParkingFee(parkTime, pickupTime) {
+//
+ let fees = 3; 
+ let overnight = false;
+ //convert the parktime to ph and pm
+ let [ph, pm] = parkTime.split(":").map(Number)
+ let [eh, em] = pickupTime.split(":").map(Number)
+
+ //convert ph and eh to min
+ let startTime = ph*60 +pm;
+ let endTime = eh *60 + em;
+
+ //check if it is overnight;
+   if(endTime < startTime){
+      endTime += 24 *60;
+      overnight = !overnight;
+   }
+//time that past since the car entered the 
+//parking lot
+   const spentTime = endTime -startTime
+   console.log(spentTime)
+
+   // convert back to hours
+   const hours = Math.ceil(spentTime/60);
+   console.log(hours)
+
+   // ouput the cost 
+let cost = hours <2? 5 : fees * hours
+   console.log(cost)
+
+     if(overnight) cost +=10
+   return  `$${cost}`
+
+}
+
+calculateParkingFee("18:15", "01:30")
+
+
 // 2nd solution
 
 function calculateParkingFee(parkTime, pickupTime) {
