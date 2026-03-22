@@ -42,3 +42,43 @@ function getCapturedValue(pieces) {
 
   return totalValue;
 }
+
+
+//2nd solution
+function capturedPiecesValue(pieces) {
+  const initial = {
+    P: 8,
+    R: 2,
+    N: 2,
+    B: 2,
+    Q: 1,
+    K: 1
+  };
+
+  const values = {
+    P: 1,
+    R: 5,
+    N: 3,
+    B: 3,
+    Q: 9,
+    K: 0
+  };
+
+  // Count remaining pieces
+  for (let p of pieces) {
+    initial[p]--;
+  }
+
+  // Check if King is captured
+  if (initial["K"] > 0) {
+    return "Checkmate";
+  }
+
+  // Calculate total value of captured pieces
+  let total = 0;
+  for (let p in initial) {
+    total += initial[p] * values[p];
+  }
+
+  return total;
+}
