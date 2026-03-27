@@ -31,4 +31,16 @@ function invertedMatrix (matrix){
         //loop through the matrix and replace values
         return matrix.map(row => row.map(value => value === a ? b : a)) 
     }
-    
+
+    // 3rd solution
+    function invertedMatrix(matrix) {
+        let [a,b] = [...new Set(matrix.flat())];
+        for(let r =0; r< matrix.length;r++){
+            for(let c = 0; c< matrix[r].length;c++){
+                matrix[r][c] = matrix[r][c] === a ? b : a   
+            }
+        }
+        return matrix
+    }
+
+
