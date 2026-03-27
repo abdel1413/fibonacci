@@ -36,3 +36,8 @@ function invertedMatrix (matrix){
     }
 
 
+    //one liner solution
+   const invertMatrix = m => m.map(r => r.map(c => c === m[0][0] ? [...new Set(m.flat())][1] : [...new Set(m.flat())][0]));
+
+
+
