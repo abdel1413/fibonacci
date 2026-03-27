@@ -8,19 +8,11 @@ function invertedMatrix (matrix){
   
   // Return:
   
-  // [[1, 4, 7],
-  //  [2, 5, 8],
-  //  [3, 6, 9]]
-  
-    const result = [];
-    for(let c =0; c < matrix[0].length; c++){
-      const row = []
-      for(let r =0; r < matrix.length; r++){
-        row.push(matrix[r][c])
-      }
-      result.push(row)
-    }
-    return result
+  let values = [...new Set(matrix.flat())]
+    const [a,b] = values
+ return matrix.map(row => row.map(value => value === a ? b : a))
+  }
+
   }
 
   //2nd solution;
