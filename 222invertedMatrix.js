@@ -1,4 +1,4 @@
-const invertedMatrix = (matrix) => {
+function invertedMatrix (matrix){
   // Given a 2D matrix, return the transpose of the matrix.
   //  The transpose of a matrix is the matrix flipped over its diagonal. 
   // For example, given the following matrix:
@@ -22,3 +22,13 @@ const invertedMatrix = (matrix) => {
     }
     return result
   }
+
+  //2nd solution;
+ function invertedMatrix(matrix) {
+        //flatten the matrix and get unique values
+        let [a,b] = [...new Set(matrix.flat())];
+
+        //loop through the matrix and replace values
+        return matrix.map(row => row.map(value => value === a ? b : a)) 
+    }
+    
