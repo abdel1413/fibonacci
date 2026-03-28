@@ -1,14 +1,11 @@
 function getShadow(time) {
-   //convert to 24h format
-   //if it greather than 12? 
-  
    let [h, m] = time.split(":").map(Number)
    //convert to decimal hours
     let decimalHours = h + (m ===30 ? .5: 0)
 
     //check for no shadow
     if(decimalHours < 6 || decimalHours >=18 || decimalHours ===12) return "No shadow"
-    //calculate the diffence
+    //calculate the difference
    let difference = Math.abs(12 - decimalHours)
    console.log('d',difference)
     //calculate the distance;
