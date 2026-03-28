@@ -1,11 +1,5 @@
 function invertedMatrix (matrix){
-  // Given a 2D matrix, return the transpose of the matrix.
-  //  The transpose of a matrix is the matrix flipped over its diagonal. 
-  // For example, given the following matrix:
-  // [[1, 2, 3],
-  //  [4, 5, 6],
-  //  [7, 8, 9]]
-  
+ 
   // Return:
   
   let values = [...new Set(matrix.flat())]
@@ -13,7 +7,7 @@ function invertedMatrix (matrix){
  return matrix.map(row => row.map(value => value === a ? b : a))
   }
 
-  }
+  
 
   //2nd solution;
  function invertedMatrix(matrix) {
