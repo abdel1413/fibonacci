@@ -13,3 +13,15 @@ function coffeeRoast(str) {
   if (avg <= 2.5) return "Medium";
   return "Dark";
 }
+
+//2nd solution
+const coffeeRoast = s => {
+  let avg = s
+    .replace(/'/g, "1")
+    .replace(/-/g, "2")
+    .replace(/\./g, "3")
+    .split("")
+    .reduce((a, b) => a + +b, 0) / s.length;
+
+  return avg < 1.75 ? "Light" : avg <= 2.5 ? "Medium" : "Dark";
+};
