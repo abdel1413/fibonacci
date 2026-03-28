@@ -21,6 +21,16 @@ function getShadow(time) {
   return `${distance}ft ${direction}`;
 }
 
+//2nd solution
+function getShadow(time) {
+   //convert to 24h format
+   //if it is greater than 12?
+
+   let [h, m] = time.split(":").map(Number), decimalH = h + (m ===30? .5: 0)
+   return  decimalH < 6 || decimalH >=18|| decimalH ==12?  "No shadow": `${Math.abs(decimalH -12)**3}ft ${decimalH <12? "west": 'east'}`
+   
+ 
+}
 
 getShadow("10:00")
 getShadow("17:30")
