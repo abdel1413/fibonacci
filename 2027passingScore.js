@@ -11,3 +11,8 @@ function passingCount(scores, passingScore) {
 function passingCount(scores, passingScore) {
     return scores.filter(s => s >=passingScore).length
 }
+
+//3rd solution
+function passingCount(scores, passingScore) {
+    return scores.reduce((count ,score)=> score >=passingScore? count + 1: count,0)
+}
