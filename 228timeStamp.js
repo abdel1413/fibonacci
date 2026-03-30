@@ -7,8 +7,13 @@ function canRetake(finishTime, currentTime) {
    
     //convert to hours
     //1s = 1000ms, 1m = 60s, 1h = 60m
+    console.log('ms', diff)
+    console.log("min", diff/(1000 * 60))
+    console.log("hours", diff/(1000 * 60 * 60))
+    console.log("days", diff/(1000 * 60 * 60 * 24))
+
     const hours= diff/(1000 * 60 * 60);
-    console.log(hours)
+    console.log("hours", hours)
     return hours>=48
 
 }
