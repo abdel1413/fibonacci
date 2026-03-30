@@ -8,6 +8,17 @@ function noConsecutiveRepeat(str) {
 //2nd solution
 const noConsecutiveRepeat = s => !/(.)\1/.test(s)
 
+
+//3rd solution
+function noConsecutiveRepeat(str) {
+    let flag = false
+  for(let i = 0; i < str.length -1; i++){
+    if(str[i] === str[i+1]) 
+        flag = true
+  }
+  return !flag
+}
+
 noConsecutiveRepeat("hello world")  // false
 noConsecutiveRepeat("abcde")  // true
 noConsecutiveRepeat("aabbcc")  // false
