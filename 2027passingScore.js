@@ -6,3 +6,8 @@ function passingCount(scores, passingScore) {
    console.log(tracker)
   return tracker;
 }
+
+//2nd solution
+function passingCount(scores, passingScore) {
+    return scores.filter(s => s >=passingScore).length
+}
