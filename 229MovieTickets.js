@@ -1,49 +1,30 @@
 function getMovieNightCost(day, showtime, numberOfTickets) {
+  let [time, period] = [showtime.slice(0, -2), showtime.slice(-2)];
+  let [hour, minute] = time.split(":").map(Number);
 
-  // monday :10
-  // tuesday :5
-  // wednesday:10
-  //thursday :10
-  
+  // convert to 24-hour format
+  if (period === "pm" && hour !== 12) hour += 12;
+  if (period === "am" && hour === 12) hour = 0;
 
-  //friday =12
-  //saturday =12
-  //sunday =12
+  let isMatinee = hour < 17; // before 5pm
 
-  //bf 5pm -2
-  //convert time into sec
-  
-  let total ;
+  let price;
 
-  let time = showtime.slice(0,-2).split(":").map(Number)
-   console.log(time)
-  let seconds=    time.reduce((acc, next )=>acc+(next*60),0)
-  console.log(seconds)
-  switch(day){
-    case "Monday":
-    case "Wednesday":
-    case "Thursday":
-     if(time < seconds ){
-      total =   8 * numberOfTickets
-     }else {
-       total = 10 * numberOfTickets
-     }
-     break;
-     case "Tuesday":
-     total = 5* numberOfTickets;
-     break;
-     case "Friday":
-     case "Saturday":
-     case "Sunday":
-     if(time < seconds){
-       total = 10 * numberOfTickets
-     }else {
-       total = 12 * numberOfTickets 
-     }
+  if (day === "Tuesday") {
+    price = 5;
+  } else if (["Friday", "Saturday", "Sunday"].includes(day)) {
+    price = 12;
+    if (isMatinee) price -= 2;
+  } else {
+    price = 10;
+    if (isMatinee) price -= 2;
   }
- console.log(`$${total}:00`)
-  return `$${total}:00`;
+
+  let total = price * numberOfTickets;
+
+  return `$${total.toFixed(2)}`;
 }
+
 
 getMovieNightCost("Saturday", "10:00pm", 1)
  getMovieNightCost("Sunday", "10:00am", 1)
