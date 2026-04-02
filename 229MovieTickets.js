@@ -26,32 +26,38 @@ function getMovieNightCost(day, showtime, numberOfTickets) {
 }
 
 
-// 2end solution 
-function  getMovieNightCost(day, showtime, numberOfTickets) {
+// 2nd solution 
+function getMovieNightCost(day, showtime, numberOfTickets) {
+  
+//get hours 
+let hours = +showtime.split(":")[0]
+console.log(hours)  
 
+//check if it is pm
+const isPm = showtime.includes("pm")
+console.log(isPm)
 
-  // convert to 24-hour format
-  if (period === "pm" && hour !== 12) hour += 12;
-  if (period === "am" && hour === 12) hour = 0;
+// add 12 to hours if it is pm and hours 
+//is not 12 otherwise add nothing
+if(isPm && hours !==12) hours +=12;
+if(!isPm && hours ===12) hours +=0;
 
-  let isMatinee = hour < 17; // before 5pm
+//check for the promotion
+let matinee = hours <17 //  5+12 => 5pm
+console.log(hours)
+ let price = day === "Tuesday"
+ ?5
+ :["Friday", "Saturday", "Sunday"].includes(day)
+      ? 12 - (matinee? 2: 0)
+      : 10 - (matinee? 2: 0)  
 
-  let price;
+       console.log("$"+(price * numberOfTickets).toFixed(2))    
+  return `$${(price * numberOfTickets).toFixed(2)}`;
+}
 
-  if (day === "Tuesday") {
-    price = 5;
-  } else if (["Friday", "Saturday", "Sunday"].includes(day)) {
-    price = 12;
-    if (isMatinee) price -= 2;
-  } else {
-    price = 10;
-    if (isMatinee) price -= 2;
-  }
-
-  let total = price * numberOfTickets;
-
-  return `$${total.toFixed(2)}`;
-  }
+//getMovieNightCost("Saturday", "10:00pm", 1)
+ // getMovieNightCost("Tuesday", "7:20pm", 2)
+ getMovieNightCost("Friday", "4:30pm", 5)
 
 getMovieNightCost("Saturday", "10:00pm", 1)
  getMovieNightCost("Sunday", "10:00am", 1)
