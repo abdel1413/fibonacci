@@ -24,3 +24,21 @@ function truncateText(str) {
 
   return result; // no truncation needed
 }
+
+
+//2nd version
+const truncateText = s => {
+  const w = c =>
+    "ilI.".includes(c) ? 1 :
+    "fjrt ".includes(c) ? 2 :
+    "abcdeghkmnopqrstuvwxyzJL".includes(c) ? 3 : 4;
+
+  let t = 0, res = "";
+
+  for (let c of s) {
+    if (t + w(c) + 3 > 50) return res + "...";
+    t += w(c);
+    res += c;
+  }
+  return res;
+};
