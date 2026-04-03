@@ -18,5 +18,31 @@ function pascalRow(n) {
   return row;
 }
 
-//pascalRow(5)
+
+//2nd version 
+
+function pascalRow(n) {
+  let row = [1]
+  for(let i = 1; i< n; i++){
+    row = [1, ...row.slice(1).map((num, index)=> num + (row[index -1]||0)),1]
+  }
+ console.log(row)
+  return row;
+}
+
+
+//3rd version
+function pascalRow(n) {
+  let row = [1]
+  while(--n){
+
+    row = [1, ...row.slice(1).map((num, index)=> num + (row[index])),1]
+  }
+  }
 pascalRow(5)
+
+
+
+
+//pascalRow(5)
+pascalRow(5) // [1, 4, 6, 4, 1]
