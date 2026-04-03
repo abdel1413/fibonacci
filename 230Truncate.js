@@ -42,3 +42,39 @@ const truncateText = s => {
   }
   return res;
 };
+
+
+//practice
+function truncateText(str) {
+ 
+  const getWidth =(ch)=>{
+       if("ilI.".includes(ch)){
+        return 1
+       }else if( "fjrt ".includes(ch) ){
+        return 2;
+       }else if("abcdeghkmnopqrstuvwxyzJL".includes(ch)){
+        return 3;
+       }else if("ABCDEFGHKMNOPQRSTUVWXYZ".includes(ch)){
+         return  4
+       }else{
+         return 0;
+       }
+      
+     }
+
+   let totalChar = 0;
+  let result = '';
+     for(let i of str){
+       let numChar = getWidth(i)
+      if(numChar + totalChar + 3 > 50){
+       return result +"..."
+      }
+      totalChar += numChar;
+      result +=i;
+     }
+    
+      console.log(result)
+  return result;
+}
+
+truncateText("The quick brown fox")
