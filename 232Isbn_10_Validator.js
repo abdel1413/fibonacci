@@ -24,6 +24,18 @@ function isValidIsbn10(str) {
   return total %11 ===0;
 }
 
+//2nd version
+function isValidIsbn10(str) {
+  const cleaned = str.replace(/-/g, '');
+  if (!/^\d{9}[\dX]$/.test(cleaned)) return false;
+
+  const total = cleaned.split('').reduce((sum, char, index) => {
+    return sum + (char === 'X' ? 10 : Number(char)) * (index + 1);
+  }, 0);
+
+  return total % 11 === 0;
+}
+
  isValidIsbn10("0-306-40615-2")
  isValidIsbn10("0-8044-2957-X")
  isValidIsbn10("0-306-40615-1")
