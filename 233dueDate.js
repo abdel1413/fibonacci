@@ -43,6 +43,13 @@ function addNineMonths(dateStr) {
   let [year, month, day] = dateStr.split("-").map(Number);
 
   // create date at 1st of target month
+  // months are 0-indexed in JS Date, so subtract 1 from month
+  // add 9 months
+  // if month exceeds 12, it will automatically roll over to the next year
+  // we set day to 1 to avoid issues with months having different number of days
+  //(and also each has 1st day so we can compare with the original day later and 
+  // take the min of the two)
+  // we will adjust the day later
   let newDate = new Date(year, month - 1 + 9, 1);
 
   // get last day of that month
