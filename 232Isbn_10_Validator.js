@@ -36,6 +36,16 @@ function isValidIsbn10(str) {
   return total % 11 === 0;
 }
 
+//3rd version
+const isValidIsbn10 = s => {
+  s = s.replace(/-/g, "");
+  return s.length === 10 &&
+    [...s].every((c,i) =>
+      (i<9 && /\d/.test(c)) || (i===9 && (/\d/.test(c)||c==="X"))
+    ) &&
+    [...s].reduce((t,c,i)=>
+      t + (c==="X"?10:Number(c))*(i+1), 0) % 11 === 0;
+};
  isValidIsbn10("0-306-40615-2")
  isValidIsbn10("0-8044-2957-X")
  isValidIsbn10("0-306-40615-1")
