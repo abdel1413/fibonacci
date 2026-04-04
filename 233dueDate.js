@@ -37,5 +37,32 @@ function getDueDate(dateStr) {
   
   return `${year}-${month}-${day}`;
 }
+
+//3rd version
+function addNineMonths(dateStr) {
+  let [year, month, day] = dateStr.split("-").map(Number);
+
+  // create date at 1st of target month
+  let newDate = new Date(year, month - 1 + 9, 1);
+
+  // get last day of that month
+  let lastDay = new Date(
+    newDate.getFullYear(),
+    newDate.getMonth() + 1,
+    0
+  ).getDate();
+
+  // use original day or last day (whichever is smaller)
+  newDate.setDate(Math.min(day, lastDay));
+
+  return newDate.toISOString().slice(0, 10);
+}
+
+
+
+
+
+
+getDueDate("2025-03-30")
 getDueDate("2025-05-29")
 getDueDate("2024-01-30")
