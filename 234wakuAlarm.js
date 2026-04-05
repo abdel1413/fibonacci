@@ -36,5 +36,13 @@ function alarmCheck(alarmTime, wakeTime) {
  }  
 }
 
+//3rd version
+const alarmCheck = (alarmTime, wakeTime) => {
+  const toMinutes = t => t.split(":").reduce((a, b) => a * 60 + +b);
+  const diff = toMinutes(wakeTime) - toMinutes(alarmTime);
+  return diff < 0 ? "early" : diff <= 10 ? "on time" : "late";
+};
+
+
 alarmCheck("07:00", "06:45")
 alarmCheck("06:30", "06:30")
