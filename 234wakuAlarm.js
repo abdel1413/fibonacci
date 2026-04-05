@@ -18,5 +18,23 @@ if(wh < ah || (wh ===ah && wm < am)) {return 'early'
 
 }
 
+//2nd version
+function alarmCheck(alarmTime, wakeTime) {
+ const getMinutes = time => {
+   const [h, m] = time.split(":").map(Number);
+   return h * 60 + m;
+ }
+ const alarmMinutes = getMinutes(alarmTime);
+ const wakeMinutes = getMinutes(wakeTime);
+
+ if (wakeMinutes < alarmMinutes) {
+   return "early";
+ } else if (wakeMinutes === alarmMinutes || wakeMinutes - alarmMinutes <= 10) {
+   return "on time";
+ } else {
+   return "late";
+ }  
+}
+
 alarmCheck("07:00", "06:45")
 alarmCheck("06:30", "06:30")
