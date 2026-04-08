@@ -22,3 +22,13 @@ function getBrowserHistory(commands) {
 
   return [history, current];
 }
+
+//2nd version
+const browserHistory = cmds => {
+  let h=[], i=-1;
+  for(let c of cmds)
+    c=="Back" ? i>0&&i-- :
+    c=="Forward" ? i<h.length-1&&i++ :
+    (h=h.slice(0,i+1), h.push(c), i++);
+  return [h,i];
+};
