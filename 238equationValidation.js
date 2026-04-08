@@ -32,3 +32,22 @@ function isCorrectEquation(str) {
 
   return result === Number(right);
 }
+
+//2nd version
+const isCorrectEquation = s => {
+  let [l,r]=s.split(" = "), t=l.split(" ");
+  let st=[+t[0]];
+
+  for(let i=1;i<t.length;i+=2){
+    let op=t[i], n=+t[i+1];
+    if(op=="*") st.push(st.pop()*n);
+    else if(op=="/") st.push(st.pop()/n);
+    else st.push(op,n);
+  }
+
+  let res=st[0];
+  for(let i=1;i<st.length;i+=2)
+    res = st[i]=="+" ? res+st[i+1] : res-st[i+1];
+
+  return res==+r;
+};
