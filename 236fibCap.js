@@ -29,3 +29,15 @@ function fibCap(str) {
 
   return result;
 }
+
+//2nd version
+const fibCap = s => {
+  let f = new Set([0,1]), a=0,b=1;
+  while(b<s.length)[a,b]=[b,a+b],f.add(b);
+
+  return [...s].map((c,i)=>
+    /[a-z]/i.test(c)
+      ? f.has(i)?c.toUpperCase():c.toLowerCase()
+      : c
+  ).join("");
+};
