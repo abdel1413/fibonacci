@@ -38,3 +38,57 @@ const isCorrectEquation = s => {
   let [l, r] = s.split(" = ");
   return Function("return " + l)() === +r;
 };
+
+//3rd version
+// using parser approach, more robust and handles multi-digit numbers
+
+function isCorrectEquation(eq) {
+  let i = 0;
+  let stack = [];
+  let num = 0;
+  let op = "+";
+
+  function applyOp(n) {
+    if (op === "+") stack.push(n);
+    else if (op === "-") stack.push(-n);
+    else if (op === "*") stack.push(stack.pop() * n);
+    else if (op === "/") stack.push(stack.pop() / n);
+  }
+
+  // Parse LEFT side until "="
+  while (i < eq.length && eq[i] !== "=") {
+    let ch = eq[i];
+
+    if (ch >= "0" && ch <= "9") {
+      num = num * 10 + Number(ch); // build number
+    }
+
+    // operator OR end of left side
+    if (
+      ch === "+" || ch === "-" ||
+      ch === "*" || ch === "/" ||
+      eq[i + 1] === "="
+    ) {
+      applyOp(num);
+      op = ch;
+      num = 0;
+    }
+
+    i++;
+  }
+
+  // compute left result
+  let leftResult = stack.reduce((a, b) => a + b, 0);
+
+  // move past "=" and space
+  i += 2;
+
+  // parse right side number
+  let right = 0;
+  while (i < eq.length) {
+    right = right * 10 + Number(eq[i]);
+    i++;
+  }
+
+  return leftResult === right;
+}
