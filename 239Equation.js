@@ -31,3 +31,10 @@ function isCorrectEquation(eq) {
 
   return result === Number(right);
 }
+
+//2nd version
+// note lass safe but much shorter
+const isCorrectEquation = s => {
+  let [l, r] = s.split(" = ");
+  return Function("return " + l)() === +r;
+};
