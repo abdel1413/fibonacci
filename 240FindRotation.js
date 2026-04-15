@@ -15,3 +15,13 @@ function findRotation(num) {
 
   return "none";
 }
+
+//2nd version
+const findRotation = n => {
+  let s = String(n), l = s.length;
+  for(let i=0;i<l;i++){
+    if(+s % l === 0) return +s;
+    s = s.slice(1) + s[0];
+  }
+  return "none";
+}
