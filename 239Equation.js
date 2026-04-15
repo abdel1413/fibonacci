@@ -3,6 +3,9 @@ function isCorrectEquation(eq) {
   let tokens = left.split(" ");
 
   // Step 1: resolve * and /
+  // eval for * and / first 
+  // for both, pop the previous val and
+  // evaluate immediately the op then push result back to stack
   let stack = [Number(tokens[0])];
 
   for (let i = 1; i < tokens.length; i += 2) {
@@ -14,11 +17,12 @@ function isCorrectEquation(eq) {
     } else if (op === "/") {
       stack.push(stack.pop() / num);
     } else {
+         //for - and + , don't eval the op yet,just push it to stack and eval later
       stack.push(op, num);
     }
   }
 
-  // Step 2: resolve + and -
+  // Step 2: resolve + and - 
   let result = stack[0];
 
   for (let i = 1; i < stack.length; i += 2) {
