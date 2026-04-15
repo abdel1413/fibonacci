@@ -92,3 +92,63 @@ function isCorrectEquation(eq) {
 
   return leftResult === right;
 }
+
+//using both parser and split techniques, more robust and handles multi-digit numbers
+function isCorrectEquation(eq) {
+  let i = 0;
+  let stack = [];
+  let num = 0;
+  let op = "+";
+
+  function apply(n) {
+    if (op === "+") stack.push(n);
+    else if (op === "-") stack.push(-n);
+    else if (op === "*") stack.push(stack.pop() * n);
+    else if (op === "/") stack.push(stack.pop() / n);
+  }
+
+  // parse LEFT side
+  while (i < eq.length && eq[i] !== "=") {
+    let ch = eq[i];
+
+    if (ch === " ") {
+      i++;
+      continue; // skip spaces
+    }
+
+    if (ch >= "0" && ch <= "9") {
+      num = num * 10 + Number(ch);
+    }
+
+    // if operator OR next is "="
+    if (
+      ch === "+" || ch === "-" ||
+      ch === "*" || ch === "/" ||
+      eq[i + 1] === "="
+    ) {
+      apply(num);
+      op = ch;
+      num = 0;
+    }
+
+    i++;
+  }
+
+  // compute left result
+  let left = stack.reduce((a, b) => a + b, 0);
+
+  // move past "="
+  i++;
+  while (eq[i] === " ") i++; // skip spaces
+
+  // parse RIGHT side
+  let right = 0;
+  while (i < eq.length) {
+    if (eq[i] !== " ") {
+      right = right * 10 + Number(eq[i]);
+    }
+    i++;
+  }
+
+  return left === right;
+}
