@@ -1,4 +1,4 @@
-function findRotation(num) {
+function getRotation(num) {
   let str = String(num);
   let len = str.length;
 
@@ -6,10 +6,9 @@ function findRotation(num) {
     let rotated = Number(str);
 
     if (rotated % len === 0) {
-      return rotated;
+      return i; // ✅ return index, NOT number
     }
 
-    // rotate: move first char to end
     str = str.slice(1) + str[0];
   }
 
