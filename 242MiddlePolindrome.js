@@ -35,6 +35,23 @@ const palindromeLocator = s => {
     : "none";
 }
 
+//3rd version
+function getPalindromeMiddle(str) {
+  // Step 1: check palindrome
+  let reversed = str.split("").reverse().join("");
+  if (str !== reversed) return "none";
+
+  // Step 2: find middle
+  let len = str.length;
+  let mid = Math.floor(len / 2);
+
+  if (len % 2 === 0) {
+    return str[mid - 1] + str[mid];
+  } else {
+    return str[mid];
+  }
+}
+
 palindromeLocator("racecar")
 palindromeLocator("11100111")
 palindromeLocator("freecodecamp")
