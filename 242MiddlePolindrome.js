@@ -52,6 +52,20 @@ function getPalindromeMiddle(str) {
   }
 }
 
+//4th version
+const getPalindromeMiddle = s => {
+  let r = [...s].reverse().join("");
+  if (s !== r) return "none";
+  let m = Math.floor(s.length/2);
+  return s.length % 2 ? s[m] : s[m-1]+s[m];
+}
+
+const getPalindromeMiddle = s => {
+  if (s !== [...s].reverse().join("")) return "none";
+  let m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : s[m - 1] + s[m];
+};
+
 palindromeLocator("racecar")
 palindromeLocator("11100111")
 palindromeLocator("freecodecamp")
