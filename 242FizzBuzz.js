@@ -28,6 +28,21 @@ function isFizzBuzz(arr) {
 return true;
 }
 
+//2nd version
+const isFizzBuzz = arr => {
+  let start = arr.find((v, i) => typeof v === "number" && (arr.start = v - i));
+  
+  return arr.every((v, i) => {
+    let n = arr.start + i;
+    return v === (
+      n % 15 === 0 ? "FizzBuzz" :
+      n % 3 === 0 ? "Fizz" :
+      n % 5 === 0 ? "Buzz" :
+      n
+    );
+  });
+};
+
 //isFizzBuzz([1, 2, "Fizz", 4, "Buzz"])
 //isFizzBuzz([13, 14, "FizzBuzz", 16, 17])
 isFizzBuzz([1, 2, "Fizz", 4, 5])
