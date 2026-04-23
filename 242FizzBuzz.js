@@ -43,6 +43,28 @@ const isFizzBuzz = arr => {
   });
 };
 
+//3rd version
+const isFizzBuzz = arr => {
+  let start;
+
+  arr.some((v, i) => {
+    if (typeof v === "number") {
+      start = v - i;
+      return true;
+    }
+  });
+
+  return arr.every((v, i) => {
+    let n = start + i;
+    return v === (
+      n % 15 === 0 ? "FizzBuzz" :
+      n % 3 === 0 ? "Fizz" :
+      n % 5 === 0 ? "Buzz" :
+      n
+    );
+  });
+};
+
 //isFizzBuzz([1, 2, "Fizz", 4, "Buzz"])
 //isFizzBuzz([13, 14, "FizzBuzz", 16, 17])
 isFizzBuzz([1, 2, "Fizz", 4, 5])
