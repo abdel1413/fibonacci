@@ -20,4 +20,6 @@ function rookBishopAttack(rook, bishop) {
     }
 }
 
-rookBishopAttack("A1", "A5")
+rookBishopAttack("A1", "A5") // should return "rook" because the rook can attack the bishop vertically.
+rookBishopAttack("A1", "E5") // should return "bishop" because the bishop can attack the rook diagonally.
+rookBishopAttack("A1", "E4") // should return "neither" because neither piece can attack the other.
