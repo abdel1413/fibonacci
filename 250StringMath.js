@@ -30,16 +30,21 @@ function stringMath(str) {
 //2nd version
 function stringMath(str) {
   let matches = [...str.matchAll(/\d+/g)];
+  console.log('matches',matches)
 
   let result = Number(matches[0][0]);
+  console.log('res',result)
 
   for (let i = 1; i < matches.length; i++) {
     let prev = matches[i - 1];
     let curr = matches[i];
 
+    console.log('prev', prev, 'curr', curr) 
     let gapLength = curr.index - (prev.index + prev[0].length);
+    console.log('gap', gapLength)
 
     let num = Number(curr[0]);
+    console.log('num', num)
 
     if (gapLength % 2 === 0) {
       result += num;
