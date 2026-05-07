@@ -22,3 +22,11 @@ function getDirection(time1, time2) {
     return "equal";
   }
 }
+//shortest version
+function getDirection(t1, t2) {
+  const toMins = t => t.split(":").reduce((a, b) => a * 60 + +b);
+  let s = toMins(t1), e = toMins(t2);
+  let f = (e - s + 1440) % 1440;
+  let b = (s - e + 1440) % 1440;
+  return f < b ? "forward" : b < f ? "backward" : "equal";
+}
