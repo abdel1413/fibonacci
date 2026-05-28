@@ -30,5 +30,24 @@ function isValidISBN13(str) {
     // Valid if divisible by 10
     return sum % 10 === 0;
 }
-//  
+//  2en version 
+function isValidISBN13(str) {
 
+    // Remove hyphens
+    const digits = str.replace(/-/g, "");
+
+    // Check format
+    if (!/^\d{13}$/.test(digits)) {
+        return false;
+    }
+
+    const sum = [...digits].reduce((total, digit, index) => {
+
+        const multiplier = index % 2 === 0 ? 1 : 3;
+
+        return total + Number(digit) * multiplier;
+
+    }, 0);
+
+    return sum % 10 === 0;
+}
