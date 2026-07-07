@@ -4,3 +4,6 @@ function isValidSchema(obj) {
   }
   return false;
 }
+
+// isValidSchema({username: "JohnDoe"}); // true
+// isValidSchema({username: 123}); // false
